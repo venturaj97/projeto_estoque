@@ -21,6 +21,8 @@ Este projeto foi desenvolvido como parte de uma atividade prática para a discip
 
 *SQLite:* O banco de dados SQLite é utilizado para armazenar os dados da aplicação de forma simples e eficiente, facilitando a persistência dos dados entre diferentes sessões da aplicação.
 
+*Pytest:* Utilização da ferramenta Pytest nativa da linguagem para rodar testes unitários.
+
 **Objetivo:**
 
 >O principal objetivo deste projeto é demonstrar a capacidade de desenvolver uma aplicação funcional em Python utilizando os conceitos aprendidos na disciplina de Desenvolvimento Rápido de Aplicações. Ao construir uma aplicação prática como uma "Loja de Roupas", os alunos podem aplicar os conceitos teóricos em um contexto real, desenvolvendo habilidades práticas de programação e gerenciamento de projetos.
