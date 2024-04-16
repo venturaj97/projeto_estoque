@@ -1,3 +1,4 @@
+
 import tkinter as tk
 from tkinter import messagebox
 import sqlite3
@@ -48,43 +49,36 @@ class LojaDeRoupa:
         produto = self.entry_produto.get()
         quantidade = int(self.entry_quantidade.get())
 
-        # Verifica se o produto já existe no estoque
         self.c.execute("SELECT * FROM estoque WHERE produto=?", (produto,))
         produto_existente = self.c.fetchone()
 
         if produto_existente:
-            # Produto já existe no estoque, atualiza a quantidade
             quantidade_atual = produto_existente[2]
             nova_quantidade = quantidade_atual + quantidade
             self.c.execute("UPDATE estoque SET quantidade=? WHERE produto=?", (nova_quantidade, produto))
             self.conn.commit()
             messagebox.showinfo("Sucesso", "Quantidade do produto atualizada no estoque.")
         else:
-            # Produto não existe no estoque, adiciona um novo registro
             self.c.execute("INSERT INTO estoque (produto, quantidade, reposicao, vendido) VALUES (?, ?, 0, 0)", (produto, quantidade))
             self.conn.commit()
             messagebox.showinfo("Sucesso", "Produto adicionado ao estoque.")
-            
-        # Limpa as entradas de texto
+
         self.entry_produto.delete(0, 'end')
         self.entry_quantidade.delete(0, 'end')
-
 
     def atualizar_vendas(self):
         vendido_str = self.entry_vendido.get()
 
-        if vendido_str.strip():  # Verifica se a string não está vazia
+        if vendido_str.strip(): 
             vendido = int(vendido_str)
             produto = self.entry_produto.get()
 
-            # Verifica se o produto existe no estoque
             self.c.execute("SELECT quantidade FROM estoque WHERE produto=?", (produto,))
             estoque_atual = self.c.fetchone()
 
             if estoque_atual is not None:
                 estoque_atual = estoque_atual[0]
                 if estoque_atual >= vendido:
-                    # Atualiza a quantidade do produto no estoque
                     self.c.execute("UPDATE estoque SET quantidade = quantidade - ? WHERE produto = ?", (vendido, produto))
                     self.conn.commit()
                     messagebox.showinfo("Sucesso", "Vendas atualizadas com sucesso.")
@@ -95,12 +89,9 @@ class LojaDeRoupa:
         else:
             messagebox.showerror("Erro", "Por favor, insira a quantidade vendida.")
         
-        # Limpa as entradas de texto
         self.entry_produto.delete(0, 'end')
         self.entry_quantidade.delete(0, 'end')
         self.entry_vendido.delete(0, 'end')
-
-
 
     def verificar_estoque(self):
         self.c.execute("SELECT produto, quantidade FROM estoque WHERE quantidade <= 5")
@@ -113,7 +104,3 @@ class LojaDeRoupa:
             messagebox.showwarning("Estoque Baixo", mensagem)
         else:
             messagebox.showinfo("Estoque", "Todos os produtos têm estoque suficiente.")
-
-root = tk.Tk()
-app = LojaDeRoupa(root)
-root.mainloop()
