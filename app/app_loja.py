@@ -25,31 +25,47 @@ class LojaDeRoupa:
         self.create_widgets()
 
     def create_widgets(self):
-        labelpr = tk.Label(self.root, text="Aleatorios Store")
-        labelpr.pack()
-        self.label_produto = tk.Label(self.root, text="Produto:")
-        self.label_produto.pack()
-        self.entry_produto = tk.Entry(self.root)
-        self.entry_produto.pack()
+        # Título da loja
+        label_title = tk.Label(self.root, text="Loja de Roupas", font=("Helvetica", 16, "bold"))
+        label_title.pack(pady=10)
 
-        self.label_quantidade = tk.Label(self.root, text="Quantidade:")
-        self.label_quantidade.pack()
-        self.entry_quantidade = tk.Entry(self.root)
-        self.entry_quantidade.pack()
+        # Entrada de Produto e Quantidade
+        frame_input = tk.Frame(self.root)
+        frame_input.pack(pady=5)
 
+        self.label_produto = tk.Label(frame_input, text="Produto:", font=("Helvetica", 12))
+        self.label_produto.grid(row=0, column=0, padx=5, pady=5)
+
+        self.entry_produto = tk.Entry(frame_input, font=("Helvetica", 12), width=20)
+        self.entry_produto.grid(row=0, column=1, padx=5, pady=5)
+
+        self.label_quantidade = tk.Label(frame_input, text="Quantidade:", font=("Helvetica", 12))
+        self.label_quantidade.grid(row=0, column=2, padx=5, pady=5)
+
+        self.entry_quantidade = tk.Entry(frame_input, font=("Helvetica", 12), width=10)
+        self.entry_quantidade.grid(row=0, column=3, padx=5, pady=5)
+
+        # Botão Adicionar Estoque
         self.btn_adicionar = tk.Button(self.root, text="Adicionar ao Estoque", command=self.adicionar_estoque)
-        self.btn_adicionar.pack()
+        self.btn_adicionar.pack(pady=5)
 
-        self.label_vendido = tk.Label(self.root, text="Vendido hoje:")
-        self.label_vendido.pack()
-        self.entry_vendido = tk.Entry(self.root)
-        self.entry_vendido.pack()
+        # Vendas Atualizadas
+        frame_vendas = tk.Frame(self.root)
+        frame_vendas.pack(pady=5)
 
+        self.label_vendido = tk.Label(frame_vendas, text="Vendido hoje:", font=("Helvetica", 12))
+        self.label_vendido.grid(row=0, column=0, padx=5, pady=5)
+
+        self.entry_vendido = tk.Entry(frame_vendas, font=("Helvetica", 12), width=10)
+        self.entry_vendido.grid(row=0, column=1, padx=5, pady=5)
+
+        # Botão Atualizar Vendas
         self.btn_atualizar = tk.Button(self.root, text="Atualizar Vendas", command=self.atualizar_vendas)
-        self.btn_atualizar.pack()
+        self.btn_atualizar.pack(pady=5)
 
+        # Botão Verificar Estoque
         self.btn_alerta = tk.Button(self.root, text="Verificar Estoque", command=self.verificar_estoque)
-        self.btn_alerta.pack()
+        self.btn_alerta.pack(pady=5)
 
     def adicionar_estoque(self):
         produto = self.entry_produto.get()
