@@ -4,11 +4,17 @@ from tkinter import messagebox
 import sqlite3
 
 class LojaDeRoupa:
-    def __init__(self, root):
+    def __init__(self, root, conn=None, c=None):
         self.root = root
         self.root.title("Loja de Roupas")
-        self.conn = sqlite3.connect('estoque.db')
-        self.c = self.conn.cursor()
+        self.conn = conn
+        self.c = c
+        
+        if self.conn is None:
+            self.conn = sqlite3.connect('estoque.db')
+        if self.c is None:
+            self.c = self.conn.cursor()
+            
         self.c.execute('''CREATE TABLE IF NOT EXISTS estoque (
                             id INTEGER PRIMARY KEY,
                             produto TEXT,
