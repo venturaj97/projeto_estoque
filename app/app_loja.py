@@ -6,7 +6,7 @@ import sqlite3
 class LojaDeRoupa:
     def __init__(self, root, conn=None, c=None):
         self.root = root
-        self.root.title("Loja de Roupas")
+        self.root.title("Estoque Little")
         self.conn = conn
         self.c = c
         
@@ -26,7 +26,7 @@ class LojaDeRoupa:
 
     def create_widgets(self):
         # Título da loja
-        label_title = tk.Label(self.root, text="Loja de Roupas", font=("Helvetica", 16, "bold"))
+        label_title = tk.Label(self.root, text="Estoque Little", font=("Helvetica", 16, "bold"))
         label_title.pack(pady=10)
 
         # Entrada de Produto e Quantidade
